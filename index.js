@@ -22,7 +22,7 @@ let intervalId = 0;
 let isGameOver = false;
 let birdY = 30, birdX = 30
 let foregroundY = canvas.height - fg.height
-let pipeX = 200
+let pipeX = 300
 let decPipe = 2
 let score = 0;
 let falling = true;
@@ -60,10 +60,34 @@ function draw(){
             score++
         }
 
-        // figure out bird collision with our pipes
-        // if () {
-        //     isGameOver = true;
-        // }
+        // collisions with pipes
+        // DONT FREAK OUT READING THIS
+        // Breathe in. 
+        // Relax.
+        // Read slowly
+        // Read carefully
+        // Visualize it
+        if( birdX + bird.width >= pipes[i].x && birdX <= pipes[i].x + pipeNorth.width && (birdY <= pipes[i].y + pipeNorth.height || birdY+bird.height >= pipes[i].y + pipeNorth.height + gap)){
+            isGameOver = true
+        }
+
+
+        // collision explanation
+        
+        // 1. birdX + bird.width >= pipes[i].x && birdX <= pipes[i].x + pipeNorth.width 
+        /*
+            That line of code actually checks if the bird is between the boundries of the pipe (i.e the left and right hand edges)
+        */
+
+        //2.(birdY <= pipes[i].y + pipeNorth.height 
+        /*
+            That checks if the bird is touching the bottom side of pipeNorth or 
+        */
+
+        //3.  birdY+bird.height >= pipes[i].y + pipeNorth.height + gap)   
+        /*
+            checks the upper side of the pipeSouth
+        */
         
     }
 
@@ -101,7 +125,7 @@ window.addEventListener('load', () => {
 
     document.addEventListener('mousedown', () => {
         falling = false
-        audio.play()
+        //audio.play()
         audio.volume = 0.1
     })
     document.addEventListener('mouseup', () => {
